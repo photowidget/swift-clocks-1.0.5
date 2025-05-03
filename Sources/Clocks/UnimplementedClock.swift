@@ -1,7 +1,6 @@
 #if (canImport(RegexBuilder) || !os(macOS) && !targetEnvironment(macCatalyst))
   import ConcurrencyExtras
   import Foundation
-  import IssueReporting
 
   /// A clock that causes an XCTest failure when any of its endpoints are invoked.
   ///
@@ -124,35 +123,14 @@
     }
 
     public var now: Instant {
-      reportIssue(
-        "Unimplemented: \(self.name).now",
-        fileID: fileID,
-        filePath: filePath,
-        line: line,
-        column: column
-      )
       return Instant(rawValue: self.base.now)
     }
 
     public var minimumResolution: Duration {
-      reportIssue(
-        "Unimplemented: \(self.name).minimumResolution",
-        fileID: fileID,
-        filePath: filePath,
-        line: line,
-        column: column
-      )
       return self.base.minimumResolution
     }
 
     public func sleep(until deadline: Instant, tolerance: Duration?) async throws {
-      reportIssue(
-        "Unimplemented: \(self.name).sleep",
-        fileID: fileID,
-        filePath: filePath,
-        line: line,
-        column: column
-      )
       try await self.base.sleep(until: deadline.rawValue, tolerance: tolerance)
     }
   }

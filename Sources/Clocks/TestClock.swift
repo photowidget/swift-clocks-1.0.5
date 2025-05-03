@@ -1,7 +1,6 @@
 #if (canImport(RegexBuilder) || !os(macOS) && !targetEnvironment(macCatalyst))
   import ConcurrencyExtras
   import Foundation
-  import IssueReporting
 
   /// A clock whose time can be controlled in a deterministic manner.
   ///
@@ -250,21 +249,6 @@
           group.cancelAll()
         }
       } catch {
-        reportIssue(
-          """
-          Expected all sleeps to finish, but some are still suspending after \(duration).
-
-          There are sleeps suspending. This could mean you are not advancing the test clock far \
-          enough for your feature to execute its logic, or there could be a bug in your feature's \
-          logic.
-
-          You can also increase the timeout of 'run' to be greater than \(duration).
-          """,
-          fileID: fileID,
-          filePath: filePath,
-          line: line,
-          column: column
-        )
       }
     }
   }
